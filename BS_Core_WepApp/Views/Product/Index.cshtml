@@ -1,0 +1,144 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@model IPagedList<BS_Core_WepApp.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "Ürün Listesi";
+    Layout = "_Layout_admin";
+}
+
+<div class="row">
+    <form id="form01" asp-controller="Product" asp-action="Search" class="col-md-12">
+        <div class="col-md-12" style="display:flex;">
+
+            <a asp-controller="Product" asp-action="Create" class="btn btn-success">Yeni Ürün Oluştur</a>
+
+            <div style="width:50px;"></div>
+            <input id="searchId" class="form-control col-md-1" placeholder="ID" name="searchId" />
+            <button type="submit" name="submit" class="btn btn-success" value="Id">Ara</button>
+
+            <div style="width:50px;"></div>
+            <input id="searchErpKod" class="form-control col-md-1" placeholder="Erp Kodu" name="searchErpKod" />
+            <button type="submit" name="submit" class="btn btn-success" value="EKod">Ara</button>
+
+            <div style="width:50px;"></div>
+            <input id="searchGroupKod" class="form-control col-md-1" placeholder="Grup Kodu" name="searchGroupKod" />
+            <button type="submit" name="submit" class="btn btn-success" value="GKod">Ara</button>
+
+            <div style="width:50px;"></div>
+            <input id="searchSetKod" class="form-control col-md-1" placeholder="Takım Kodu" name="searchSetKod" />
+            <button type="submit" name="submit" class="btn btn-success" value="SKod">Ara</button>
+
+            <div style="width:50px;"></div>
+            <input id="searchProductName" class="form-control col-md-1" placeholder="Ürün İsmi" name="searchProductName" />
+            <button type="submit" name="submit" class="btn btn-success" value="Name">Ara</button>
+
+            <div style="width:50px;"></div>
+        </div>
+    </form>
+
+    <!-- Excel Dosyası Yükleme -->
+    <form enctype="multipart/form-data" asp-controller="Product" asp-action="UploadExcel" method="post" class="col-md-12 mt-3">
+        <div class="form-group">
+            <label for="excelFile">Fiyatları Güncelle</label>
+            <input type="file" name="excelFile" id="excelFile" class="form-control-file" />
+            <button type="submit" class="btn btn-primary mt-2">Excel Yükle</button>
+        </div>
+    </form>
+
+
+</div>
+
+<!-- Ürün Listesi -->
+<div class="row" style="overflow-y:auto;">
+    @if (Model.Count() != 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Erp Kodu</th>
+                    <th>Grup Kodu</th>
+                    <th>Takım Kodu</th>
+                    <th>Takıma Dahil mi?</th>
+                    <th>Ürün İsmi</th>
+                    <th>Ürün Açıklaması</th>
+                    <th>Genişlik</th>
+                    <th>Yükseklik</th>
+                    <th>Derinlik</th>
+                    <th>Nakit Fiyatı</th>
+                    <th>Nakit İndirimli Fiyatı</th>
+                    <th>İndirim Oranı</th>
+                    <th>9 Taksitli Fiyatı</th>
+                    <th>9 Taksitli İndirimli Fiyatı</th>
+                    <th>İndirim Oranı</th>
+                    <th>Sıralama No</th>
+                    <th>Resim 1</th>
+                    <th>Resim 2</th>
+                    <th>Resim 3</th>
+                    <th>Resim 4</th>
+                    <th>Resim 5</th>
+                    <th>Resim 6</th>
+                    <th>Resim 7</th>
+                    <th>Resim 8</th>
+                    <th>Resim 9</th>
+                    <th>Resim 10</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Detay", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.erpCode)</td>
+                        <td>@string.Join(", ", item.category0)</td>
+                        <td>@string.Join(", ", item.category1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.includeSet)</td>
+                        <td>@Html.DisplayFor(modelItem => item.name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ShortDescription)</td>
+                        <td>@Html.DisplayFor(modelItem => item.olc_gen)</td>
+                        <td>@Html.DisplayFor(modelItem => item.olc_yuk)</td>
+                        <td>@Html.DisplayFor(modelItem => item.olc_der)</td>
+                        <td>@Html.DisplayFor(modelItem => item.price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.discountedPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.discountRate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.installmentPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.discountedInstallmentPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.discountInstallmentRate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.order)</td>
+                        <td><img src="@item.image0" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image1" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image2" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image3" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image4" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image5" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image6" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image7" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image8" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                        <td><img src="@item.image9" class="rounded-circle" height="100" width="100" asp-append-version="true" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <strong style="text-align:center;">
+            Kayıt bulunamadı.
+        </strong>
+    }
+</div>
+
+<!-- Sayfalama -->
+<div class="row">
+    <div style="padding-left : 5%; margin-left: 5%;">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

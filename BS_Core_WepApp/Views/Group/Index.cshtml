@@ -1,0 +1,140 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@model IPagedList<BS_Core_WepApp.Models.GroupModel>
+
+@{
+    ViewData["Title"] = "Group List";
+    Layout = "_Layout_admin";
+}
+@* <div class="row">
+    <div class="intro-message">
+        <h1>BitSpecial Firebase Database</h1>
+        <h3>Firestore/FthTest-users >> Table List</h3>
+        <hr class="intro-divider">
+    </div>
+</div> *@
+
+
+
+<div class="row">
+    <form id="form01" asp-controller="Group" asp-action="Search" class="col-md-12">
+        <div class="col-md-9 my-3" style="display:flex;">
+            <a asp-controller="Group" asp-action="Create" class="btn btn-success">Yeni Group Oluştur</a>
+            <div class="col-md-1"></div>
+            <input id="searchId" class="form-control col-md-2" placeholder="ID" name="searchId" />
+            <button type="submit" name="submit" class="btn btn-success" value="Id">Ara</button>
+            @* <a asp-controller="Group" asp-action="Search_Id" class="btn btn-success">Ara</a> *@
+
+            <div class="col-md-1"></div>
+            <input id="searchKod" class="form-control col-md-2" placeholder="Grup Kodu" name="searchKod" />
+            <button type="submit" name="submit" class="btn btn-success" value="Kod">Ara</button>
+            @* <a asp-controller="Group" asp-action="Index" class="btn btn-success">Ara</a> *@
+
+            <div class="col-md-1"></div>
+            <input id="searchName" class="form-control col-md-2" placeholder="Grup İsmi" name="searchName" />
+            <button type="submit" name="submit" class="btn btn-success" value="Name">Ara</button>
+            @* <a asp-controller="Group" asp-action="Index" class="btn btn-success">Ara</a> *@
+        </div>
+    </form>
+</div>
+<div class="row">
+    @if (Model.Count() != 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        ID
+                        @* @Html.DisplayNameFor(model => model.Id) *@
+                    </th>
+                    <th>
+                        Grup Kodu
+                        @* @Html.DisplayNameFor(model => model.code) *@
+                    </th>
+                    <th>
+                        Grup İsmi
+                        @* @Html.DisplayNameFor(model => model.name) *@
+                    </th>
+                    <th>
+                        Sıralanma No
+                        @* @Html.DisplayNameFor(model => model.order) *@
+                    </th>
+                    <th>
+                        Resim 1
+                        @* @Html.DisplayNameFor(model => model.image0) *@
+                    </th>
+                    <th>
+                        Resim 2
+                        @* @Html.DisplayNameFor(model => model.image1) *@
+                    </th>
+                    <th>
+                        Resim 3
+                        @* @Html.DisplayNameFor(model => model.image2) *@
+                    </th>
+                    <th>
+                        Resim 4
+                        @* @Html.DisplayNameFor(model => model.image3) *@
+                    </th>
+                    <th>
+                        Resim 5
+                        @* @Html.DisplayNameFor(model => model.image4) *@
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Detay", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.order)
+                        </td>
+                        <td>
+                            <img src="@item.image0" class="rounded-circle" height="100" width="100" asp-append-version="true" />
+                        </td>
+                        <td>
+                            <img src="@item.image1" class="rounded-circle" height="100" width="100" asp-append-version="true" />
+                        </td>
+                        <td>
+                            <img src="@item.image2" class="rounded-circle" height="100" width="100" asp-append-version="true" />
+                        </td>
+                        <td>
+                            <img src="@item.image3" class="rounded-circle" height="100" width="100" asp-append-version="true" />
+                        </td>
+                        <td>
+                            <img src="@item.image4" class="rounded-circle" height="100" width="100" asp-append-version="true" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+       
+    }
+    else
+    {
+        <strong style="text-align:center;">
+            Kayıt bulunamadı.
+        </strong>
+    }
+</div>
+
+<div class="row">
+    <div style="padding-left : 5%; margin-left: 5%;">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

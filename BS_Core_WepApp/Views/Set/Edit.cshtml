@@ -1,0 +1,235 @@
+﻿@model BS_Core_WepApp.Models.SetModel
+
+@{
+    ViewData["Title"] = "Takım Düzenle";
+}
+<div class="container">
+@*     <div class="row">
+        <div class="intro-message">
+            <h1>BitSpecial Firebase Database</h1>
+            <h3>Firestore/FthTest-users >> Edit User</h3>
+            <hr class="intro-divider">
+        </div>
+    </div> *@
+
+    <div class="col-md-10 mx-auto py-4">
+        <div class="card">
+            <div class="card-header bg-primary text-uppercase text-white">
+                <h4>Takım Düzenle</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form enctype="multipart/form-data" asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Id" class="control-label">Id</label>
+                                <input asp-for="Id" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="Id" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="category" class="control-label">Grup Kodu</label>
+                                <select asp-for="category" class="form-control">
+                                    <option value="bebek">bebek</option>
+                                    <option value="cocuk">cocuk</option>
+                                    <option value="genc">genc</option>
+                                    <option value="tamamlayici">tamamlayici</option>
+                                    <option value="mobilya">mobilya</option>
+                                    <option value="karyola">karyola/daybed</option>
+                                    <option value="kampanya">kampanya</option>
+                                </select>
+                                <span asp-validation-for="category" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="code" class="control-label">Takım Kodu</label>
+                                <input asp-for="code" class="form-control"/>
+                                <span asp-validation-for="code" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="name" class="control-label">Takım İsmi</label>
+                                <input asp-for="name" class="form-control" />
+                                <span asp-validation-for="name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="price" class="control-label">Fiyatı</label>
+                                <input asp-for="price" class="form-control" id="price" oninput="calculateDiscountRate()" />
+                                <span asp-validation-for="price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="discountedPrice" class="control-label">İndirimli Fiyatı</label>
+                                <input asp-for="discountedPrice" class="form-control" id="discountedPrice" oninput="calculateDiscountRate()" />
+                                <span asp-validation-for="discountedPrice" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="discountRate" class="control-label">İndirim Oranı</label>
+                                <input asp-for="discountRate" class="form-control" id="discountRate" oninput="manualDiscountRateChange()" />
+                                <span asp-validation-for="discountRate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="order" class="control-label">Sıralama No</label>
+                                <input asp-for="order" class="form-control" />
+                                <span asp-validation-for="order" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image0" class="control-label">Resim 1</label>
+                                <div class="custom-file">
+                                    <input id="customFile0" class="custom-file-input" type="file" name="file0" accept="image/*" />
+                                    <input type="hidden" asp-for="image0" />
+                                    <label class="custom-file-label" for="customFile0">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image0" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image0" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image1" class="control-label">Resim 2</label>
+                                <div class="custom-file">
+                                    <input id="customFile1" class="custom-file-input" type="file" name="file1" accept="image/*" />
+                                    <input type="hidden" asp-for="image1" />
+                                    <label class="custom-file-label" for="customFile1">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image1" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image1" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image2" class="control-label">Resim 3</label>
+                                <div class="custom-file">
+                                    <input id="customFile2" class="custom-file-input" type="file" name="file2" accept="image/*" />
+                                    <input type="hidden" asp-for="image2" />
+                                    <label class="custom-file-label" for="customFile2">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image2" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image2" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image3" class="control-label">Resim 4</label>
+                                <div class="custom-file">
+                                    <input id="customFile3" class="custom-file-input" type="file" name="file3" accept="image/*" />
+                                    <input type="hidden" asp-for="image3" />
+                                    <label class="custom-file-label" for="customFile3">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image3" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image3" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image4" class="control-label">Resim 5</label>
+                                <div class="custom-file">
+                                    <input id="customFile4" class="custom-file-input" type="file" name="file4" accept="image/*" />
+                                    <input type="hidden" asp-for="image4" />
+                                    <label class="custom-file-label" for="customFile4">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image4" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image4" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image5" class="control-label">Resim 6</label>
+                                <div class="custom-file">
+                                    <input id="customFile5" class="custom-file-input" type="file" name="file5" accept="image/*" />
+                                    <input type="hidden" asp-for="image5" />
+                                    <label class="custom-file-label" for="customFile5">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image5" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image5" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image6" class="control-label">Resim 7</label>
+                                <div class="custom-file">
+                                    <input id="customFile6" class="custom-file-input" type="file" name="file6" accept="image/*" />
+                                    <input type="hidden" asp-for="image6" />
+                                    <label class="custom-file-label" for="customFile6">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image6" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image6" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image7" class="control-label">Resim 8</label>
+                                <div class="custom-file">
+                                    <input id="customFile7" class="custom-file-input" type="file" name="file7" accept="image/*" />
+                                    <input type="hidden" asp-for="image7" />
+                                    <label class="custom-file-label" for="customFile7">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image7" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image7" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image8" class="control-label">Resim 9</label>
+                                <div class="custom-file">
+                                    <input id="customFile8" class="custom-file-input" type="file" name="file8" accept="image/*" />
+                                    <input type="hidden" asp-for="image8" />
+                                    <label class="custom-file-label" for="customFile8">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image8" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image8" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image9" class="control-label">Resim 10</label>
+                                <div class="custom-file">
+                                    <input id="customFile9" class="custom-file-input" type="file" name="file9" accept="image/*" />
+                                    <input type="hidden" asp-for="image9" />
+                                    <label class="custom-file-label" for="customFile9">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image9" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image9" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" value="Update" class="btn btn-primary rounded-0">Güncelle</button>
+                                <a class="btn btn-info" asp-action="Index"><i class="fa fa-fast-forward"></i>Listeye Geri Dön</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        let manualOverride = false;
+
+        function calculateDiscountRate() {
+            if (manualOverride) return;
+
+            // Nakit Fiyat hesaplama
+            const price = parseFloat(document.getElementById('price').value);
+            const discountedPrice = parseFloat(document.getElementById('discountedPrice').value);
+
+            if (!isNaN(price) && !isNaN(discountedPrice) && price > 0) {
+                const discountRate = ((price - discountedPrice) / price) * 100;
+                document.getElementById('discountRate').value = discountRate.toFixed(2);
+            } else {
+                document.getElementById('discountRate').value = '';
+            }
+
+            // 9 Taksitli Fiyat hesaplama
+            const installmentPrice = parseFloat(document.getElementById('installmentPrice').value);
+            const discountedInstallmentPrice = parseFloat(document.getElementById('discountedInstallmentPrice').value);
+
+            if (!isNaN(installmentPrice) && !isNaN(discountedInstallmentPrice) && installmentPrice > 0) {
+                const discountInstallmentRate = ((installmentPrice - discountedInstallmentPrice) / installmentPrice) * 100;
+                document.getElementById('discountInstallmentRate').value = discountInstallmentRate.toFixed(2);
+            } else {
+                document.getElementById('discountInstallmentRate').value = '';
+            }
+        }
+
+        function manualDiscountRateChange() {
+            manualOverride = true;
+        }
+
+        function manualDiscountRateChange() {
+            manualOverride = true;
+        }
+
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+
+        document.getElementById('price').addEventListener('input', () => { manualOverride = false; calculateDiscountRate(); });
+        document.getElementById('discountedPrice').addEventListener('input', () => { manualOverride = false; calculateDiscountRate(); });
+
+    </script>
+}

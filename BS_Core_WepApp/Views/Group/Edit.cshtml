@@ -1,0 +1,115 @@
+﻿@model BS_Core_WepApp.Models.GroupModel
+
+@{
+    ViewData["Title"] = "Group Düzenle";
+}
+<div class="container">
+@*     <div class="row">
+        <div class="intro-message">
+            <h1>BitSpecial Firebase Database</h1>
+            <h3>Firestore/FthTest-users >> Edit User</h3>
+            <hr class="intro-divider">
+        </div>
+    </div> *@
+
+    <div class="col-md-10 mx-auto py-4">
+        <div class="card">
+            <div class="card-header bg-primary text-uppercase text-white">
+                <h4>Group Düzenle</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form enctype="multipart/form-data" asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Id" class="control-label">Id</label>
+                                <input asp-for="Id" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="Id" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="code" class="control-label">Grup Kodu</label>
+                                <input asp-for="code" class="form-control" />
+                                <span asp-validation-for="code" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="name" class="control-label">Grup İsmi</label>
+                                <input asp-for="name" class="form-control" />
+                                <span asp-validation-for="name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="order" class="control-label">Sıralama No</label>
+                                <input asp-for="order" class="form-control" />
+                                <span asp-validation-for="order" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image0" class="control-label">Resim 1</label>
+                                <div class="custom-file">
+                                    <input id="customFile0" class="custom-file-input" type="file" name="file0" accept="image/*" />
+                                    <input type="hidden" asp-for="image0" />
+                                    <label class="custom-file-label" for="customFile0">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image0" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image0" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image1" class="control-label">Resim 2</label>
+                                <div class="custom-file">
+                                    <input id="customFile1" class="custom-file-input" type="file" name="file1" accept="image/*" />
+                                    <input type="hidden" asp-for="image1" />
+                                    <label class="custom-file-label" for="customFile1">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image1" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image1" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image2" class="control-label">Resim 3</label>
+                                <div class="custom-file">
+                                    <input id="customFile2" class="custom-file-input" type="file" name="file2" accept="image/*" />
+                                    <input type="hidden" asp-for="image2" />
+                                    <label class="custom-file-label" for="customFile2">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image2" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image2" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image3" class="control-label">Resim 4</label>
+                                <div class="custom-file">
+                                    <input id="customFile3" class="custom-file-input" type="file" name="file3" accept="image/*" />
+                                    <input type="hidden" asp-for="image3" />
+                                    <label class="custom-file-label" for="customFile3">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image3" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image3" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="image4" class="control-label">Resim 5</label>
+                                <div class="custom-file">
+                                    <input id="customFile4" class="custom-file-input" type="file" name="file4" accept="image/*" />
+                                    <input type="hidden" asp-for="image4" />
+                                    <label class="custom-file-label" for="customFile4">Dosya Seç</label>
+                                </div>
+                                <img src="@Model.image4" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                                <span asp-validation-for="image4" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" value="Update" class="btn btn-primary rounded-0">Güncelle</button>
+                                <a class="btn btn-info" asp-action="Index"><i class="fa fa-fast-forward"></i>Listeye Geri Dön</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

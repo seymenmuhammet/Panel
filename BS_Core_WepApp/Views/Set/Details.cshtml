@@ -1,0 +1,226 @@
+﻿@model BS_Core_WepApp.Models.SetModel
+
+@{
+    ViewData["Title"] = "Takım Detayları";
+}
+<div class="container">
+@*     <div class="row">
+        <div class="intro-message">
+            <h1>BitSpecial Firebase Database</h1>
+            <h3>Firestore/FthTest-users >> User Details</h3>
+            <hr class="intro-divider">
+        </div>
+    </div> *@
+
+    <div class="col-md-10 mx-auto py-4">
+        <div class="card">
+            <div class="card-header bg-info text-uppercase text-white">
+                <h4>Takım Detayları</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        Id
+                        @* @Html.DisplayNameFor(model => model.Id) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Id)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Grup Kodu
+                        @* @Html.DisplayNameFor(model => model.category) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.category)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Takım Kodu
+                        @* @Html.DisplayNameFor(model => model.code) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.code)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Takım İsmi
+                        @* @Html.DisplayNameFor(model => model.name) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Fiyatı
+                        @* @Html.DisplayNameFor(model => model.price) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.price)
+                    </dd>
+                    <dt class="col-sm-2">
+                        İndirimli Fiyatı
+                        @* @Html.DisplayNameFor(model => model.discountedPrice) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.discountedPrice)
+                    </dd>
+                    <dt class="col-sm-2">
+                        İndirim Oranı
+                        @* @Html.DisplayNameFor(model => model.discountRate) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.discountRate)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Sıralama No
+                        @* @Html.DisplayNameFor(model => model.order) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.order)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 1
+                        @* @Html.DisplayNameFor(model => model.image0) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image0) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image0" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 2
+                        @* @Html.DisplayNameFor(model => model.image1) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image1) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image1" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 3
+                        @* @Html.DisplayNameFor(model => model.image2) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image2) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image2" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 4
+                        @* @Html.DisplayNameFor(model => model.image3) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image3) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image3" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 5
+                        @* @Html.DisplayNameFor(model => model.image4) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image4) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image4" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 6
+                        @* @Html.DisplayNameFor(model => model.image5) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image5) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image5" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 7
+                        @* @Html.DisplayNameFor(model => model.image6) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image6) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image6" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 8
+                        @* @Html.DisplayNameFor(model => model.image7) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image7) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image7" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 9
+                        @* @Html.DisplayNameFor(model => model.image8) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image8) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image8" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                    <dt class="col-sm-2">
+                        Resim 10
+                        @* @Html.DisplayNameFor(model => model.image9) *@
+                    </dt>
+                    <dd class="col-sm-10">
+                        @if (@Html.DisplayNameFor(model => model.image9) == null)
+                        {
+                            <img src="/img/bit-special-icoon.png" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img src="@Model.image9" class="rounded-circle" height="125" width="125" asp-append-version="true" />
+                        }
+                    </dd>
+                </dl>
+                <div class="form-group">
+                    <a class="btn btn-info" asp-action="Index"><i class="fa fa-fast-forward"></i>Listeye Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
